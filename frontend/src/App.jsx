@@ -25,10 +25,14 @@ const App = () => {
     setModal(photoID);
   };
 
+  const closeModal = () => {
+    setModal();
+  }
+
   return (
     <div className="App">
       <HomeRoute topics = {topics} photos = {photos} favorites={favorites} toggleFavorite={toggleFavorite} isFavPhotoExist={(favorites.length > 0)} showModal={showModal}/>
-      {modal && <PhotoDetailsModal/>}
+      {modal && <PhotoDetailsModal closeModal={closeModal}/>}
     </div>
   );
 };
