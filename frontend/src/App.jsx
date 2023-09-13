@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute topics = {topics} photos = {photos} favorites={favorites} toggleFavorite={toggleFavorite} />
+      <HomeRoute topics = {topics} photos = {photos} favorites={favorites} toggleFavorite={toggleFavorite} isFavPhotoExist={(favorites.length > 0)}/>
       
     </div>
   );
