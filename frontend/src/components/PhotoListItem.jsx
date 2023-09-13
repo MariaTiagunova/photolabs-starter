@@ -6,7 +6,7 @@ import "../styles/PhotoListItem.scss";
 const PhotoListItem = (props) => {
   /* Insert React */
   return (
-    <section key = {props.id} className="photo-list__item">
+    <section className="photo-list__item">
       <div>
       <img className="photo-list__image" src={props.imageSource} />
       </div>
