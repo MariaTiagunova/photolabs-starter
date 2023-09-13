@@ -3,6 +3,7 @@ import React from 'react';
 // import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
 import PhotoList from 'components/PhotoList';
+import TopicList from 'components/TopicList';
 
 const sampleDataForPhotoList = [
   {
@@ -58,12 +59,31 @@ const sampleDataForPhotoList = [
   },
 ];
 
+const sampleDataForTopicList = [
+  {
+    id: "1",
+    slug: "topic-1",
+    title: "Nature",
+  },
+  {
+    id: "2",
+    slug: "topic-2",
+    title: "Travel",
+  },
+  {
+    id: "3",
+    slug: "topic-3",
+    title: "People",
+  },
+];
+
 // const photos = new Array(3).fill(sampleDataForPhotoListItem);
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
     <div className="App">
-      <PhotoList photos = {sampleDataForPhotoList}/>
+      <TopicList topics = {sampleDataForTopicList} />
+      <PhotoList photos = {sampleDataForPhotoList} />
       
     </div>
   );
