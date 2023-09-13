@@ -19,7 +19,6 @@ const photos = new Array(3).fill(sampleDataForPhotoListItem);
 const App = () => {
   return (
     <div className="App">
-     
       <PhotoList photos = {photos} />
       
     </div>
