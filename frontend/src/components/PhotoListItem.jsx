@@ -5,14 +5,17 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
+  // Check if props.favorites is defined and contains the id
+  const isFavorite = props.favorites && props.favorites.includes(props.id);
+
   return (
     <section className="photo-list__item">
       <div>
         <PhotoFavButton 
         photoId = {props.id}
-        isFavorite = {props.favorites.includes(props.id)}
+        isFavorite={isFavorite}
         toggleFavorite = {props.toggleFavorite} />
-      <img className="photo-list__image" src={props.urls.regular} onClick={props.showModal}/>
+      <img className="photo-list__image" src={props.urls.regular} onClick={() => props.showModal(props.id)}/>
       </div>
       <div className="photo-list__user-details">
         <div>

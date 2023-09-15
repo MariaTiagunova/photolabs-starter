@@ -12,7 +12,9 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   const [favorites, setFavorites] = useState([]);
-  const [modal, setModal] = useState();
+  const [modal, setModal] = useState(null);
+  const selectedPhotoId = modal;
+  const selectedPhoto = photos.find((photo) => photo.id === selectedPhotoId);
 
   const toggleFavorite = (photoId) => {
     if (favorites.includes(photoId)) {
@@ -21,18 +23,21 @@ const App = () => {
       setFavorites([...favorites, photoId]);
     }
   };
-  const showModal = (photoID) => {
-    setModal(photoID);
+  const showModal = (photoId) => {
+    setModal(photoId);
   };
 
   const closeModal = () => {
-    setModal();
+    setModal(null);
   }
 
   return (
     <div className="App">
       <HomeRoute topics = {topics} photos = {photos} favorites={favorites} toggleFavorite={toggleFavorite} isFavPhotoExist={(favorites.length > 0)} showModal={showModal}/>
-      {modal && <PhotoDetailsModal closeModal={closeModal}/>}
+      {modal && 
+      <PhotoDetailsModal photo={selectedPhoto}
+      similarPhotos={selectedPhoto.similar_photos} // Pass similar photos data
+      closeModal={closeModal}/>}
     </div>
   );
 };
