@@ -37,7 +37,8 @@ const App = () => {
       {modal && 
       <PhotoDetailsModal photo={selectedPhoto}
       similarPhotos={selectedPhoto.similar_photos} // Pass similar photos data
-      closeModal={closeModal}/>}
+      closeModal={closeModal}
+      favorites={favorites} toggleFavorite={toggleFavorite} isFavPhotoExist={(favorites.length > 0)} />}
     </div>
   );
 };
