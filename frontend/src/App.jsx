@@ -1,8 +1,5 @@
-import React from 'react';
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
-import topics from 'mocks/topics';
-import photos from 'mocks/photos';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from './hooks/useApplicationData'; // Import the hook
 
@@ -15,9 +12,10 @@ const App = () => {
     closeModal,
   } = useApplicationData();
 
+ const topics = [];
   // Extract the state values from the state object
   const { favorites, modal } = state;
-
+  const photos = state.photoData;
   const selectedPhotoId = modal;
   const selectedPhoto = photos.find((photo) => photo.id === selectedPhotoId);
 
@@ -25,13 +23,13 @@ const App = () => {
     <div className="App">
       <HomeRoute
         topics={topics}
-        photos={photos}
+        photos={state.photoData}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         isFavPhotoExist={favorites.length > 0}
         showModal={showModal}
       />
-      {modal && (
+      {modal && selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
           similarPhotos={selectedPhoto.similar_photos}
