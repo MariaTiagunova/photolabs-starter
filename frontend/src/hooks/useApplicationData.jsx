@@ -6,6 +6,7 @@ const ACTIONS = {
   SHOW_MODAL: 'SHOW_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
 };
 
 // Define reducer function
@@ -25,6 +26,9 @@ const reducer = (state, action) => {
 
     case ACTIONS.SET_PHOTO_DATA:
       return { ...state, photoData: action.payload };
+
+    case ACTIONS.SET_TOPIC_DATA:
+      return { ...state, topicData: action.payload };
 
     default:
       return state;
@@ -59,7 +63,11 @@ const useApplicationData = () => {
         .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
   }, []); // Empty dependency array means this effect runs once on mount
 
-
+  useEffect(() => {
+    fetch("/api/topics")
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }));
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return {
     state,

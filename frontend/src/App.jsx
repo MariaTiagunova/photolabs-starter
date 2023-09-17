@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        topics={topics}
+        topics={state.topicData}
         photos={state.photoData}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
