@@ -4,19 +4,19 @@ import HomeRoute from 'routes/HomeRoute';
 import topics from 'mocks/topics';
 import photos from 'mocks/photos';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
-
-// Import the custom hook
-import { useApplicationData } from 'hooks/useApplicationData';
+import useApplicationData from './hooks/useApplicationData'; // Import the hook
 
 const App = () => {
-  // Use the custom hook to access state and actions
+  // Call the useApplicationData hook to get the state and actions
   const {
-    favorites,
-    modal,
+    state,
     toggleFavorite,
     showModal,
     closeModal,
   } = useApplicationData();
+
+  // Extract the state values from the state object
+  const { favorites, modal } = state;
 
   const selectedPhotoId = modal;
   const selectedPhoto = photos.find((photo) => photo.id === selectedPhotoId);
