@@ -42,6 +42,7 @@ const useApplicationData = () => {
     modal: null,
     photoData: [],
     topicData: [],
+    topicId: null,
   });
 
   // Define actions
@@ -69,11 +70,20 @@ const useApplicationData = () => {
         .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }));
   }, []); // Empty dependency array means this effect runs once on mount
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`/api/topics/photos/${topicId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+        }, []);
+  };
+
   return {
     state,
     toggleFavorite,
     showModal,
     closeModal,
+    fetchPhotosByTopic
   };
 };
 
