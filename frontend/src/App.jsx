@@ -13,12 +13,10 @@ const App = () => {
       fetchPhotosByTopic
   } = useApplicationData();
 
- const topics = [];
   // Extract the state values from the state object
-  const { favorites, modal } = state;
-  const photos = state.photoData;
-  const selectedPhotoId = modal;
-  const selectedPhoto = photos.find((photo) => photo.id === selectedPhotoId);
+    const { favorites, modal, topicData, photoData } = state;
+    const selectedPhotoId = modal;
+    const selectedPhoto = photoData.find((photo) => photo.id === selectedPhotoId);
 
   return (
     <div className="App">

@@ -1,20 +1,22 @@
 import React from 'react';
-
 import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
-const HomeRoute = (props) => {
+const HomeRoute = ({ topics, isFavPhotoExist, photos, favorites, toggleFavorite, showModal, fetchPhotosByTopic }) => {
+    // Function to handle topic clicks
     const handleTopicClick = (topicId) => {
         // Call the fetchPhotosByTopic function when a topic is clicked
-        props.fetchPhotosByTopic(topicId);
+        fetchPhotosByTopic(topicId);
     };
-  return (
-    <div className="home-route">
-      <TopNavigation topics = {props.topics} isFavPhotoExist={props.isFavPhotoExist} onTopicClick={handleTopicClick}/>
-      <PhotoList photos =  {props.photos} favorites={props.favorites} toggleFavorite={props.toggleFavorite} showModal={props.showModal}/>
-    </div>
-  );
+
+    return (
+        <div className="home-route">
+            {/* Render the TopNavigation and PhotoList components */}
+            <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} onTopicClick={handleTopicClick} />
+            <PhotoList photos={photos} favorites={favorites} toggleFavorite={toggleFavorite} showModal={showModal} />
+        </div>
+    );
 };
 
 export default HomeRoute;
