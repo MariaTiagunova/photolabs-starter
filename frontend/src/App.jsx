@@ -11,36 +11,40 @@ const App = () => {
     toggleFavorite,
     showModal,
     closeModal,
-      fetchPhotosByTopic
+    fetchPhotosByTopic,
+    handleShowFavorites
   } = useApplicationData();
 
   // Extract the state values from the state object
-    const { favorites, modal, topicData, photoData } = state;
-    const selectedPhotoId = modal;
-    const selectedPhoto = photoData.find((photo) => photo.id === selectedPhotoId);
+  const { favorites, modal, topicData, photoData, favoritePhotos, showFavorites } = state;
+  const selectedPhotoId = modal;
+  const selectedPhoto = photoData.find((photo) => photo.id === selectedPhotoId);
 
   return (
-    <div className="App">
-      <HomeRoute
-        topics={state.topicData}
-        photos={state.photoData}
-        favorites={favorites}
-        toggleFavorite={toggleFavorite}
-        isFavPhotoExist={favorites.length > 0}
-        showModal={showModal}
-        fetchPhotosByTopic = {fetchPhotosByTopic}
-      />
-      {modal && selectedPhoto && (
-        <PhotoDetailsModal
-          photo={selectedPhoto}
-          similarPhotos={selectedPhoto.similar_photos}
-          closeModal={closeModal}
-          favorites={favorites}
-          toggleFavorite={toggleFavorite}
-          isFavPhotoExist={favorites.length > 0}
+      <div className="App">
+        <HomeRoute
+            topics={state.topicData}
+            photos={state.photoData}
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+            isFavPhotoExist={favorites.length > 0}
+            showModal={showModal}
+            fetchPhotosByTopic={fetchPhotosByTopic}
+            favoritePhotos={favoritePhotos}
+            handleShowFavorites={handleShowFavorites}
+            showFavorites={showFavorites}
         />
-      )}
-    </div>
+        {modal && selectedPhoto && (
+            <PhotoDetailsModal
+                photo={selectedPhoto}
+                similarPhotos={selectedPhoto.similar_photos}
+                closeModal={closeModal}
+                favorites={favorites}
+                toggleFavorite={toggleFavorite}
+                isFavPhotoExist={favorites.length > 0}
+            />
+        )}
+      </div>
   );
 };
 

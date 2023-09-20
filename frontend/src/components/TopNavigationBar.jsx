@@ -11,13 +11,14 @@ const TopNavigation = (props) => {
             props.onTopicClick(topicId);
         }
     };
-  return (
-    <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
-      <TopicList topics = {props.topics} onTopicClick={handleTopicClick}/>
-      <FavBadge isFavPhotoExist={props.isFavPhotoExist}/>
-    </div>
-  )
+
+    return (
+        <div className="top-nav-bar">
+            <span className="top-nav-bar__logo">PhotoLabs</span>
+            <TopicList topics={props.topics} onTopicClick={handleTopicClick} />
+            <FavBadge isFavPhotoExist={props.isFavPhotoExist} handleShowFavorites={props.handleShowFavorites} />
+        </div>
+    );
 }
 
 export default TopNavigation;

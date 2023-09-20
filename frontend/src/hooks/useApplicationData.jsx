@@ -1,12 +1,13 @@
 import React, { useReducer, useEffect } from 'react';
 
-// Define action types
 const ACTIONS = {
   TOGGLE_FAVORITE: 'TOGGLE_FAVORITE',
   SHOW_MODAL: 'SHOW_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  TOGGLE_SHOW_FAVORITES: 'TOGGLE_SHOW_FAVORITES',
+  SET_FAVORITE_PHOTOS: 'SET_FAVORITE_PHOTOS',
 };
 
 // Define reducer function
@@ -35,6 +36,12 @@ const reducer = (state, action) => {
       // Set the topic data in the state
       return { ...state, topicData: action.payload };
 
+    case ACTIONS.TOGGLE_SHOW_FAVORITES:
+      return { ...state, showFavorites: !state.showFavorites }; // Toggle showFavorites state
+
+    case ACTIONS.SET_FAVORITE_PHOTOS:
+      return { ...state, favoritePhotos: action.payload };
+
     default:
       return state;
   }
@@ -48,6 +55,7 @@ const useApplicationData = () => {
     photoData: [],
     topicData: [],
     topicId: null,
+    showFavorites: false,
   });
 
   // Define actions
@@ -89,12 +97,33 @@ const useApplicationData = () => {
         }, []);
   };
 
+  const handleShowFavorites = () => {
+    // Dispatch the TOGGLE_SHOW_FAVORITES action to toggle the showFavorites state
+    dispatch({ type: ACTIONS.TOGGLE_SHOW_FAVORITES });
+    console.log(state.favoritePhotos);
+  };
+
+  useEffect(() => {
+    if (state.showFavorites) {
+      // Fetch favorite photos when showFavorites state changes
+      const favoritePhotos = state.photoData.filter((photo) =>
+          state.favorites.includes(photo.id)
+      );
+      dispatch({ type: ACTIONS.SET_FAVORITE_PHOTOS, payload: favoritePhotos });
+    } else {
+      // Clear favorite photos when showFavorites is false
+      dispatch({ type: ACTIONS.SET_FAVORITE_PHOTOS, payload: [] });
+    }
+  }, [state.showFavorites, state.favorites, state.photoData]);
+
+
   return {
     state,
     toggleFavorite,
     showModal,
     closeModal,
-    fetchPhotosByTopic
+    fetchPhotosByTopic,
+    handleShowFavorites,
   };
 };
 
